@@ -4,6 +4,8 @@ const port = process.env.PORT || 8000;
 const mongoose = require('./config/mongoose');
 
 app.use(express.json());
+
+// connecting to routes
 app.use('/', require('./routes'));
 
 app.listen(port, (err)=> {

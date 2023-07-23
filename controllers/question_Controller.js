@@ -1,6 +1,11 @@
 const Question = require('../models/questions');
 const Option = require('../models/options');
 
+module.exports.home = async function(req, res) {
+    res.send('The server is live now!');
+}
+
+// creating a question
 module.exports.create = async function(req, res) {
     try {
         let createQuestions = new Question(req.body);
@@ -11,6 +16,7 @@ module.exports.create = async function(req, res) {
     }
 }
 
+// viewing all questions
 module.exports.view = async function(req, res) {
     try {
         let questions = await Question.find({});
@@ -20,6 +26,7 @@ module.exports.view = async function(req, res) {
     }
 }
 
+// viewing one question
 module.exports.viewOneQuestion = async function(req, res) {
     try {
         let question = await Question.findById(req.params.id).populate('options');
@@ -32,6 +39,7 @@ module.exports.viewOneQuestion = async function(req, res) {
     }
 }
 
+// deleting a question unless one of its options has votes
 module.exports.delete = async (req, res)=> {
     try {
         let question = await Question.findById(req.params.id);

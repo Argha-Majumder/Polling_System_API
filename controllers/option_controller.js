@@ -3,6 +3,8 @@ const Question = require('../models/questions');
 
 //console.log("Inside option controller");
 let questionId;
+
+// creating option for a specific question
 module.exports.create = async (req, res) => {
     try {
         let createOption = new Option(req.body);
@@ -14,7 +16,7 @@ module.exports.create = async (req, res) => {
         if (!question) {
             return res.status(404).json({ message: "Question not found" });
         }
-        const link = `http://localhost:8000/options/${createOption._id}/add_vote`;
+        const link = `https://pollingsystemapi-production.up.railway.app/options/${createOption._id}/add_vote`; // adding the desired link
         createOption.link_to_vote = link;
         const insertOption = await createOption.save();
         question.options.push(insertOption._id);
@@ -25,6 +27,7 @@ module.exports.create = async (req, res) => {
     }
 }
 
+// adding vote for your option
 module.exports.addVote = async (req, res) => {
     try {
         let oneOption = await Option.findById(req.params.id);
@@ -39,6 +42,7 @@ module.exports.addVote = async (req, res) => {
     }
 }
 
+// deleting an option unless it has votes 
 module.exports.delete = async (req, res) => {
     try {
         let oneOption = await Option.findById(req.params.id);

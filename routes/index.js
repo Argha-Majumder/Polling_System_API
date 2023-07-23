@@ -10,5 +10,6 @@ router.use('/questions', require('./question_routes'));
 router.post('/questions/create', questionController.create);
 router.delete('/options/:id/delete', optionController.delete);
 router.put('/options/:id/add_vote', optionController.addVote);
+router.get('/', questionController.home);
 
 module.exports = router;
